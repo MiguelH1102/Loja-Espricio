@@ -1,0 +1,80 @@
+type: collection.insomnia.rest/5.0
+name: Atividades BackEnd
+meta:
+  id: wrk_837dda03573c4fcea4db683affad1d30
+  created: 1759861471043
+  modified: 1759861471043
+  description: ""
+collection:
+  - name: Atividade clientes
+    meta:
+      id: fld_01d4372dbf174630b61cf50f6b11a392
+      created: 1760439822731
+      modified: 1760439822731
+      sortKey: -1760439822731
+      description: ""
+    children:
+      - url: localhost:8081/clientes
+        name: Listar Clientes
+        meta:
+          id: req_b6e395cc9e40437ab1ff370167d9e61b
+          created: 1760439826186
+          modified: 1760448178162
+          isPrivate: false
+          description: ""
+          sortKey: -1760439826186
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8081/clientes
+        name: Criar Clientes
+        meta:
+          id: req_0fc9c3bb69524531920cee5cd2ffd109
+          created: 1760444285770
+          modified: 1760448164621
+          isPrivate: false
+          description: ""
+          sortKey: -1760444285770
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeCliente":"João",
+            	"cpfCliente": "123412479812"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_72958dfeea01c8b7e8db7a330dcd2991cd42ed12
+    created: 1759861471050
+    modified: 1759861471050
+environments:
+  name: Base Environment
+  meta:
+    id: env_72958dfeea01c8b7e8db7a330dcd2991cd42ed12
+    created: 1759861471047
+    modified: 1759861471047
+    isPrivate: false
