@@ -9,7 +9,7 @@ const clienteController = {
     listarClientes: async (req, res) => {
         try {
             const clientes = await clienteModels.buscarTodos();
-
+            
             res.status(200).json(clientes);
         } catch (error) {
             console.error(`Erro ao listar todos os usuários`, error);

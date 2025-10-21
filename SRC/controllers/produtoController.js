@@ -8,9 +8,21 @@ const produtoController = {
 
     listarProdutos: async (req, res) => {
         try {
-            const produtos = await produtoModel.buscarTodos();
-
+            const {idProduto}= req.query;
+            await produtoModel.buscaUm()
+            
+            
+            if(idProduto){
+                const produto = await produtoModel.buscaUm(idProduto);
+                
+                res.status(200).json(produto);
+            }
+            const produtos = await produtoModel.buscarTodos()
+            
+            
             res.status(200).json(produtos);
+            
+           
         } catch (error) {
             console.error(`Erro ao listar produtos`, error);
             res.status(500).json({messag: `Error ao buscar produtos`});
