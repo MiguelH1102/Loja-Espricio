@@ -18,6 +18,24 @@ const clienteModels = {
        } 
     },
 
+    buscarUm: async (idCliente) =>{
+        try {
+            const pool = await getConnection();
+
+            const querySQL = 'SELECT* FROM Clientes WHERE idCliente = @idCliente';
+
+            const result = await pool
+                .request()
+                .input('idCliente', sql.UniqueIdentifier, idCliente)
+                .query(querySQL);
+
+                return result.recordset;
+        } catch (error) {
+            console.error(`Erro ao buscar cliente`, error);
+            throw error;
+        }
+    },
+
     buscarCpf: async (cpfCliente) => {
         try {
             const pool = await getConnection();
@@ -25,7 +43,7 @@ const clienteModels = {
             const querySQL = 'SELECT * FROM Clientes WHERE cpfCliente = @cpfCliente;';
 
             const result = await pool.request()
-            .input ('cpfCliente', sql.VarChar(12), cpfCliente)
+            .input ('cpfCliente', sql.Char(12), cpfCliente)
             .query(querySQL);
 
             return result.recordset;
@@ -45,7 +63,7 @@ const clienteModels = {
 
             await pool.request()
             .input('nomeCliente', sql.VarChar(100), nomeCliente)
-            .input('cpfCliente', sql.VarChar(12),cpfCliente)
+            .input('cpfCliente', sql.Char(12),cpfCliente)
             .query(querySQL);
 
             

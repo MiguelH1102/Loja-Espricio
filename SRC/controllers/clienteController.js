@@ -8,8 +8,20 @@ const clienteController = {
 
     listarClientes: async (req, res) => {
         try {
-            const clientes = await clienteModels.buscarTodos();
+            const {idCliente} = req.query;
             
+            if(idCliente){
+                if(idCliente.length != 36){
+                    return res.status(400).json({erro: "id do cliente invalido"})
+                }
+                
+                const cliente = await clienteModels.buscarUm(idCliente);
+                
+                return res.status(200).json(cliente)
+            }
+            
+            const clientes = await clienteModels.buscarTodos();
+
             res.status(200).json(clientes);
         } catch (error) {
             console.error(`Erro ao listar todos os usuários`, error);
@@ -32,13 +44,13 @@ const clienteController = {
             
             const {nomeCliente, cpfCliente}= req.body;
 
-            if(nomeCliente == undefined || cpfCliente == undefined || isNaN(cpfCliente)){
+            if(nomeCliente == undefined || cpfCliente == undefined){
                 return res.status(400).json({erro:`Campos obrigatorios não preenchidos`});
             }
 
            const result = await clienteModels.buscarCpf(cpfCliente);
            if(result.length > 0){
-            return res.status(409).json({erro:`CPF já existe!`});
+            return res.status(409).json({message:`CPF já existe!`});
            }
             
            
